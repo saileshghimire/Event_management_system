@@ -20,6 +20,7 @@ model User {
   lastName String
   email String @unique
   phoneNumber String
+  password String
   registrations Registration[]
 }
 
