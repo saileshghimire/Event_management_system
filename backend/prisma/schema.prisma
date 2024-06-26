@@ -12,3 +12,30 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model User {
+  id Int @id @default(autoincrement())
+  firstName String
+  lastName String
+  email String @unique
+  phoneNumber String
+  registrations Registration[]
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  date DateTime
+  location String
+  registrations Registration[]
+}
+
+model Registration {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  event Event @relation(fields: [eventId], references: [id])
+  eventId Int
+}
