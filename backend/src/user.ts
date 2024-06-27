@@ -11,16 +11,19 @@ const prisma = new PrismaClient();
 
 export const Signup = async (req:Request, res:Response) => {
     const body = req.body;
-    const { success } = signupInput.safeParse(body);
+    try{
+    const validationResult = signupInput.safeParse(body);
 
-    if(!success){
+    if(!validationResult.success){
+        console.log(validationResult.error);
+        
         return res.status(411).json({
             message:"Inputs are not correct"
         });
     }
-    try{
+    
 
-        const existingUser = await prisma.user.findUnique({
+        const existingUser = await prisma.user.findFirst({
             where: { email:body.email },
           });
       

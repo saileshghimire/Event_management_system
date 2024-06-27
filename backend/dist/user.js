@@ -20,14 +20,15 @@ const JWT_SECRET = "SAILESH";
 const prisma = new client_1.PrismaClient();
 const Signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
-    const { success } = index_1.signupInput.safeParse(body);
-    if (!success) {
-        return res.status(411).json({
-            message: "Inputs are not correct"
-        });
-    }
     try {
-        const existingUser = yield prisma.user.findUnique({
+        const validationResult = index_1.signupInput.safeParse(body);
+        if (!validationResult.success) {
+            console.log(validationResult.error);
+            return res.status(411).json({
+                message: "Inputs are not correct"
+            });
+        }
+        const existingUser = yield prisma.user.findFirst({
             where: { email: body.email },
         });
         if (existingUser) {
