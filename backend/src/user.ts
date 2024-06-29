@@ -120,7 +120,7 @@ export const UpdateUser = async (req:Request, res:Response) => {
                 firstName: body.firstName,
                 lastName: body.lastName,
                 phoneNumber: body.phoneNumber,
-                password: body.phoneNumber
+                password: body.password
             }
         });
         return res.status(200).json({ user: updatedUser });

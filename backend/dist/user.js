@@ -115,7 +115,7 @@ const UpdateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 firstName: body.firstName,
                 lastName: body.lastName,
                 phoneNumber: body.phoneNumber,
-                password: body.phoneNumber
+                password: body.password
             }
         });
         return res.status(200).json({ user: updatedUser });
