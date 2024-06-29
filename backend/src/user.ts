@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { signupInput,signinInput } from "./validation/index";
+import { signupInput,signinInput, updateInput } from "./validation/index";
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = "SAILESH"
@@ -97,6 +97,14 @@ export const Signin = async (req:Request, res:Response) =>{
 export const UpdateUser = async (req:Request, res:Response) => {
     const userId = req.userId;
     const body = req.body;
+
+    const validationResult = updateInput.safeParse(body);
+    if(!validationResult.success){
+        console.log(`Error at update input ${validationResult.error}`);
+        return res.status(411).json({
+            message:"Sorry wrong Input"
+        });      
+    }
 
     if(!userId){
         return res.status(400).json({

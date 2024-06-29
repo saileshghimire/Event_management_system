@@ -94,6 +94,13 @@ exports.Signin = Signin;
 const UpdateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.userId;
     const body = req.body;
+    const validationResult = index_1.updateInput.safeParse(body);
+    if (!validationResult.success) {
+        console.log(`Error at update input ${validationResult.error}`);
+        return res.status(411).json({
+            message: "Sorry wrong Input"
+        });
+    }
     if (!userId) {
         return res.status(400).json({
             message: "probelm in authencate token"
