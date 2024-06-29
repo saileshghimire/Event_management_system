@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { signupInput,signinInput, updateInput } from "./validation/index";
+import { signupInput,signinInput, updateInput } from "../validation/index";
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = "SAILESH"
