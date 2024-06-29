@@ -132,3 +132,7 @@ export const UpdateUser = async (req:Request, res:Response) => {
     }
 
 }
+
+export const SignOut = (req:Request, res:Response) =>{
+    // 
+}
