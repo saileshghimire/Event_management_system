@@ -93,3 +93,34 @@ export const Signin = async (req:Request, res:Response) =>{
         })
     }
 }
+
+export const UpdateUser = async (req:Request, res:Response) => {
+    const userId = req.userId;
+    const body = req.body;
+
+    if(!userId){
+        return res.status(400).json({
+            message:"probelm in authencate token"
+        });
+    }
+    try {
+        const updatedUser = await prisma.user.update({
+            where:{
+                id:userId
+            },
+            data:{
+                firstName: body.firstName,
+                lastName: body.lastName,
+                phoneNumber: body.phoneNumber,
+                password: body.phoneNumber
+            }
+        });
+        return res.status(200).json({ user: updatedUser });
+
+    } catch(error){
+        console.log(`Error at updateUser function: ${error}`);
+        return res.status(500).json({ error: 'Internal server error' });
+        
+    }
+
+}

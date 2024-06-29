@@ -21,6 +21,7 @@ export const authenticateToken = (req:Request, res:Response, next:NextFunction) 
             });
         }
     } catch (err) {
+        console.log(`Error at authencateToken ${err}`);       
         return res.status(403).json({
             message: "Unauthorized"
         });

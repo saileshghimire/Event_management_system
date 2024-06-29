@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Signin = exports.Signup = void 0;
+exports.UpdateUser = exports.Signin = exports.Signup = void 0;
 const client_1 = require("@prisma/client");
 const index_1 = require("./validation/index");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -91,3 +91,31 @@ const Signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.Signin = Signin;
+const UpdateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.userId;
+    const body = req.body;
+    if (!userId) {
+        return res.status(400).json({
+            message: "probelm in authencate token"
+        });
+    }
+    try {
+        const updatedUser = yield prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                firstName: body.firstName,
+                lastName: body.lastName,
+                phoneNumber: body.phoneNumber,
+                password: body.phoneNumber
+            }
+        });
+        return res.status(200).json({ user: updatedUser });
+    }
+    catch (error) {
+        console.log(`Error at updateUser function: ${error}`);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+});
+exports.UpdateUser = UpdateUser;
