@@ -20,3 +20,10 @@ export const updateInput = z.object({
     phoneNumber: z.string().optional(),
     password: z.string().optional()
 })
+
+export const CreateEventInput = z.object({
+    name: z.string(),
+    description: z.string(),
+    date: z.date(),
+    location: z.string()
+})
