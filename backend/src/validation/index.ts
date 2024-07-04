@@ -24,6 +24,6 @@ export const updateInput = z.object({
 export const CreateEventInput = z.object({
     name: z.string(),
     description: z.string(),
-    date: z.date(),
+    date: z.string(),
     location: z.string()
 })

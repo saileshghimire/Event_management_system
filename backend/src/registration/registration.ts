@@ -32,7 +32,7 @@ registration.post('/',authenticateToken, async (req:Request, res:Response)=>{
 
 registration.get('/:id', authenticateToken, async (req:Request, res:Response)=>{
     const userId= req.userId;
-    const eventId = parseInt(req.params.eventId);
+    const eventId = parseInt(req.params.id);
     try{
         const event = await prisma.event.findFirst({
             where:{
@@ -54,7 +54,16 @@ registration.get('/:id', authenticateToken, async (req:Request, res:Response)=>{
 
         const registrations = await prisma.registration.findMany({
             where: { eventId },
-            include: { user: true },
+            include: {
+                user: {
+                    select:{
+                        firstName:true,
+                        lastName: true,
+                        email:true,
+                        phoneNumber:true
+                    }
+                }
+            },
         });
 
         return res.status(200).json({

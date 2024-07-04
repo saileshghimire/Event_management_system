@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateInput = exports.signinInput = exports.signupInput = void 0;
+exports.CreateEventInput = exports.updateInput = exports.signinInput = exports.signupInput = void 0;
 const zod_1 = __importDefault(require("zod"));
 exports.signupInput = zod_1.default.object({
     firstName: zod_1.default.string(),
@@ -21,4 +21,10 @@ exports.updateInput = zod_1.default.object({
     lastName: zod_1.default.string().optional(),
     phoneNumber: zod_1.default.string().optional(),
     password: zod_1.default.string().optional()
+});
+exports.CreateEventInput = zod_1.default.object({
+    name: zod_1.default.string(),
+    description: zod_1.default.string(),
+    date: zod_1.default.string(),
+    location: zod_1.default.string()
 });
