@@ -1,16 +1,22 @@
 FROM node:20.17.0-alpine3.19
 
+# Set the working directory inside the container
 WORKDIR /backend
 
-COPY package*.json ./
+# Copy package.json and package-lock.json to the working directory
+COPY backend/package*.json ./
 
 # Install dependencies
 RUN npm install
-# Can you add a script to the global package.json that does this?
+
+# Copy the rest of the application code to the container
+COPY backend/ .
+
+# Generate Prisma client
 RUN npx prisma generate
 
-# Can you filter the build down to just one app?
+# Compile TypeScript code (if applicable)
 RUN npx tsc -b
 
-
+# Command to run your application
 CMD ["npm", "run", "dev"]
