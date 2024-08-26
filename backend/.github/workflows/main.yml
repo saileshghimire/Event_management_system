@@ -18,7 +18,7 @@ jobs:
         run: npm install
         
       - name: Generate prisma Dependencies  # Added a space after the hyphen
-        run: npm run db:generate
+        run: npx prisma generate
         
       - name: Run Build
-        run: npm run build
+        run: npx tsc -b
