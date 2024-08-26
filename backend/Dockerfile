@@ -14,3 +14,6 @@ RUN npx tsc -b
 
 
 CMD ["npm", "run", "dev"]
+
+
+
