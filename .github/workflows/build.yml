@@ -13,12 +13,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+        working-directory: backend
       
       - name: Install Dependencies
         run: npm install
+        working-directory: backend
         
       - name: Generate prisma Dependencies  # Added a space after the hyphen
         run: npx prisma generate
+        working-directory: backend
         
       - name: Run Build
         run: npx tsc -b
+        working-directory: backend
