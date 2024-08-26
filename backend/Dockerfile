@@ -2,7 +2,7 @@ FROM node:20.12.0-alpine3.19
 
 WORKDIR /
 
-COPY . .
+COPY . /
 
 # Install dependencies
 RUN npm install
@@ -14,6 +14,3 @@ RUN npx tsc -b
 
 
 CMD ["npm", "run", "dev"]
-
-
-
