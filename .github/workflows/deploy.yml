@@ -35,15 +35,15 @@ jobs:
       run: docker pull sailesh11/event-management-system:latest
       
 
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          sudo docker pull sailesh11/event-management-system:latest
-          sudo docker stop event-management-system || true
-          sudo docker rm event-management-system || true
-          sudo docker run -d --name event-management-system -p 3005:3000 sailesh11/event-management-system:latest
+    # - name: Deploy to EC2
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     host: ${{ secrets.SSH_HOST }}
+    #     username: ${{ secrets.SSH_USERNAME }}
+    #     key: ${{ secrets.SSH_KEY }}
+    #     script: |
+    #       sudo docker pull sailesh11/event-management-system:latest
+    #       sudo docker stop event-management-system || true
+    #       sudo docker rm event-management-system || true
+    #       sudo docker run -d --name event-management-system -p 3005:3000 sailesh11/event-management-system:latest
         
